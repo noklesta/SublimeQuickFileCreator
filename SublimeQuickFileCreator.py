@@ -11,6 +11,7 @@ class QuickCreateFileCommand(sublime_plugin.WindowCommand):
 
         self.construct_excluded_pattern()
         self.build_relative_paths()
+        self.move_current_directory_to_top()
         self.window.show_quick_panel(self.relative_paths, self.dir_selected)
 
     def find_root(self):
@@ -35,6 +36,17 @@ class QuickCreateFileCommand(sublime_plugin.WindowCommand):
             for dir in dirs:
                 relative_path = os.path.join(base, dir)[self.rel_path_start:]
                 self.relative_paths.append(relative_path)
+
+    def move_current_directory_to_top(self):
+        view = self.window.active_view()
+
+        if view:
+            cur_dir = os.path.dirname(view.file_name())[self.rel_path_start:]
+            for path in self.relative_paths:
+                if path == cur_dir:
+                    i = self.relative_paths.index(path)
+                    self.relative_paths.insert(0, self.relative_paths.pop(i))
+                    break
 
     def dir_selected(self, selected_index):
         print selected_index

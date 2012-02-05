@@ -8,7 +8,7 @@ This plugin, on the other hand, presents you with a quick panel showing all the 
 
 ## Excluded directories
 
-Some directories, such as those named "tmp" or ".git", are excluded by default in order to make the directory listing less unwieldy. You can override this setting by specifying a list of regular expressions in your preferences (it might be a good idea to copy the one in SublimeQuickFileCreator.sublime-settings and modify it).
+Some directories, such as those named "tmp" or ".git", are excluded by default in order to make the directory listing easier to navigate. You can override this setting by specifying a list of regular expressions in your preferences (it might be a good idea to copy the one in SublimeQuickFileCreator.sublime-settings and modify it).
 
 Note that each pattern is anchored to the beginning and end of the directory name, so you should not use ^ or $ in your patterns.
 
