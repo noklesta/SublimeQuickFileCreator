@@ -2,5 +2,9 @@
     {
         "caption": "Quick File Creator: Create file",
         "command": "quick_create_file"
+    },
+    {
+        "caption": "Quick File Creator: Create directory",
+        "command": "quick_create_directory"
     }
 ]
