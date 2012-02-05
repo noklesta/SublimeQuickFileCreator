@@ -29,7 +29,7 @@ class QuickCreateFileCommand(sublime_plugin.WindowCommand):
         self.excluded = re.compile('^' + '|'.join(settings.get('excluded_dir_patterns')) + '$')
 
     def build_relative_paths(self):
-        self.relative_paths = ['.']
+        self.relative_paths = ['[root: %s]' % os.path.split(self.root)[-1]]
         for base, dirs, files in os.walk(self.root):
             [dirs.remove(dir) for dir in dirs if self.excluded.search(dir)]
 
