@@ -1,10 +1,10 @@
 # Quick File Creator plugin for Sublime Text 2
 
-Plugin to quickly create a file in a directory of your choosing.
+Plugin to quickly create a file or a subdirectory using ST2's fuzzy filtering feature.
 
-Normally, to create a file in ST2, you open a new tab and click "Save" or "Save As". Then you have to locate the directory where you want to save the file using the standard system dialog, which often starts in a directory completely unrelated to your project...
+Normally, in order to create a file or directory in ST2, you navigate to the directory in the side panel, right click on the directory and choose "New File" or "New Folder". Alternatively, you can create a new file by opening a new tab and clicking "Save" or "Save As". Then you have to locate the directory where you want to save the file using the standard system dialog (which may start in a directory completely unrelated to your project if you don't have any files already opened).
 
-This plugin, on the other hand, presents you with a quick panel showing all the directories in your project (determined by the (first) root directory in your side panel) and lets you select a directory from the list using the standard fuzzy filtering feature of ST2. If you are currently editing a file, the directory containing that file is located at the top of the list to make it even easier to save the new file in the same directory. When you have selected a directory, you are prompted to input the file name, and that's it!
+This plugin, on the other hand, presents you with a quick panel showing all the directories in your project (determined by the (first) root directory in your side panel) and lets you select a directory from the list using the standard fuzzy filtering feature of ST2. If you are currently editing a file, the directory containing that file is located at the top of the list to make it even easier to create the new file or subdirectory in the same directory. When you have selected a directory, you are prompted to input the file or subdirectory name, and that's it!
 
 ## Installation
 
@@ -32,12 +32,14 @@ Alternatively, you can clone the repository directly from GitHub into your Packa
 The plugin does not install any key bindings automatically. You can set up
 your own key bindings like this:
 
-    { "keys": ["super+ctrl+n"], "command": "quick_create_file" }
+    { "keys": ["super+ctrl+n"], "command": "quick_create_file" },
+    { "keys": ["super+ctrl+d"], "command": "quick_create_directory" }
 
 If you are using Vintage mode and want to use sequences of non-modifier keys,
 you can restrict the key bindings to command mode like this:
 
-    { "keys": [" ", "n"], "command": "quick_create_file", "context": [{"key": "setting.command_mode"}] }
+    { "keys": [" ", "n"], "command": "quick_create_file", "context": [{"key": "setting.command_mode"}] },
+    { "keys": [" ", "d"], "command": "quick_create_directory", "context": [{"key": "setting.command_mode"}] }
 
 ## Excluded directories
 
@@ -52,6 +54,9 @@ Example setting:
         "tmp", ".git", ".svn"
       ]
     }
+
+## Future work
+As far as I have been able to establish, ST2 does not currently support programmatically selecting a directory in the side bar (please correct me if I'm wrong!). If ST2 includes this ability in the future, I will make any newly created subdirectories become immediately selected in the side bar.
 
 ## Licence
 

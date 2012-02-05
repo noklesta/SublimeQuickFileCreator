@@ -4,11 +4,11 @@ import sublime
 import sublime_plugin
 
 
-class QuickCreateFileCommand(sublime_plugin.WindowCommand):
+class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
     ROOT_DIR_PREFIX = '[root: '
     ROOT_DIR_SUFFIX = ']'
 
-    def run(self):
+    def doCommand(self):
         if not self.find_root():
             return
 
@@ -54,7 +54,7 @@ class QuickCreateFileCommand(sublime_plugin.WindowCommand):
     def dir_selected(self, selected_index):
         if selected_index != -1:
             self.selected_dir = self.relative_paths[selected_index]
-            self.window.show_input_panel('File name:', '', self.file_name_input, None, None)
+            self.window.show_input_panel(self.INPUT_PANEL_CAPTION, '', self.file_name_input, None, None)
 
     def file_name_input(self, file_name):
         if self.selected_dir.startswith(self.ROOT_DIR_PREFIX):
@@ -69,6 +69,23 @@ class QuickCreateFileCommand(sublime_plugin.WindowCommand):
         else:
             self.create_and_open_file(full_path)
 
+
+class QuickCreateFileCommand(QuickCreateFileCreatorBase):
+    INPUT_PANEL_CAPTION = 'File name:'
+
+    def run(self):
+        self.doCommand()
+
     def create_and_open_file(self, path):
         open(path, 'w')
         self.window.open_file(path)
+
+
+class QuickCreateDirectoryCommand(QuickCreateFileCreatorBase):
+    INPUT_PANEL_CAPTION = 'Folder name:'
+
+    def run(self):
+        self.doCommand()
+
+    def create_and_open_file(self, path):
+        os.mkdir(path)
