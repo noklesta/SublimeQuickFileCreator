@@ -5,6 +5,9 @@ import sublime_plugin
 
 
 class QuickCreateFileCommand(sublime_plugin.WindowCommand):
+    ROOT_DIR_PREFIX = '[root: '
+    ROOT_DIR_SUFFIX = ']'
+
     def run(self):
         if not self.find_root():
             return
@@ -29,7 +32,7 @@ class QuickCreateFileCommand(sublime_plugin.WindowCommand):
         self.excluded = re.compile('^' + '|'.join(settings.get('excluded_dir_patterns')) + '$')
 
     def build_relative_paths(self):
-        self.relative_paths = ['[root: %s]' % os.path.split(self.root)[-1]]
+        self.relative_paths = [self.ROOT_DIR_PREFIX + os.path.split(self.root)[-1] + self.ROOT_DIR_SUFFIX]
         for base, dirs, files in os.walk(self.root):
             [dirs.remove(dir) for dir in dirs if self.excluded.search(dir)]
 
@@ -49,4 +52,23 @@ class QuickCreateFileCommand(sublime_plugin.WindowCommand):
                     break
 
     def dir_selected(self, selected_index):
-        print selected_index
+        if selected_index != -1:
+            self.selected_dir = self.relative_paths[selected_index]
+            self.window.show_input_panel('File name:', '', self.file_name_input, None, None)
+
+    def file_name_input(self, file_name):
+        if self.selected_dir.startswith(self.ROOT_DIR_PREFIX):
+            dir = ''
+        else:
+            dir = self.selected_dir
+
+        full_path = os.path.join(self.root, dir, file_name)
+        if os.path.lexists(full_path):
+            sublime.error_message('File already exists:\n%s' % full_path)
+            return
+        else:
+            self.create_and_open_file(full_path)
+
+    def create_and_open_file(self, path):
+        open(path, 'w')
+        self.window.open_file(path)
