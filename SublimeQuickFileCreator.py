@@ -34,7 +34,8 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
     def build_relative_paths(self):
         self.relative_paths = [self.ROOT_DIR_PREFIX + os.path.split(self.root)[-1] + self.ROOT_DIR_SUFFIX]
         for base, dirs, files in os.walk(self.root):
-            [dirs.remove(dir) for dir in dirs if self.excluded.search(dir)]
+            dirs_copy = dirs[:]
+            [dirs.remove(dir) for dir in dirs_copy if self.excluded.search(dir)]
 
             for dir in dirs:
                 relative_path = os.path.join(base, dir)[self.rel_path_start:]
