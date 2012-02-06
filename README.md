@@ -4,7 +4,7 @@ Plugin that lets you quickly create a file or a subdirectory using ST2's fuzzy m
 
 Normally, in order to create a file or directory in ST2, you have to navigate to the directory in the side panel and right-click on it, or you open a new tab and save it using the operating system's save dialog (which may start in a directory completely unrelated to your project if you don't have any files already opened).
 
-This plugin pops up a quick panel that lets you pick the directory for the new file or subdirectory using the built-in fuzzy matching. If you are currently editing a file, that file's directory will be located at the top of the list to make it even easier to create the new file or subdirectory in the same location. Select a directory, input the new name in the input panel at the bottom of the window, and you're done!
+This plugin instead pops up a quick panel that lets you pick the directory for the new file or subdirectory using the built-in fuzzy matching. If you are currently editing a file, that file's directory will be located at the top of the list to make it even easier to create the new file or subdirectory in the same location. Select a directory, input the new name in the input panel at the bottom of the window, and you're done!
 
 ## Installation
 
@@ -29,7 +29,7 @@ Alternatively, you can clone the repository directly from GitHub into your Packa
 
 ## Usage
 
-Bring up the Command Palette and select "Quick File Creator: Create file" or "Quick File Creator: Create directory", or set up key bindings as explained below.
+Bring up the Command Palette and select "Quick File Creator: Create file" or "Quick File Creator: Create directory", or set up some key bindings as explained below.
 
 ## Key bindings
 
