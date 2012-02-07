@@ -28,8 +28,8 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
         return True
 
     def construct_excluded_pattern(self):
-        patterns = [re.escape(pat) for pat in self.get_setting('excluded_dir_patterns')]
-        self.excluded = re.compile('^' + '|'.join(patterns) + '$')
+        patterns = [pat.replace('|', '\\') for pat in self.get_setting('excluded_dir_patterns')]
+        self.excluded = re.compile('^(?:' + '|'.join(patterns) + ')$')
 
     def get_setting(self, key):
         settings = None

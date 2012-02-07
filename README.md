@@ -70,15 +70,14 @@ modify it.
 
 Note that each pattern is anchored to the beginning and end of the directory
 name, so you should not use ^ or $ in your patterns. Also, since ST2 does not
-allow backslashes in settings files, you cannot escape special regex
-characters such as dots in the directory names. However, they will be
-automatically escaped for you.
+allow backslashes in settings files, use a vertical bar (|) instead of a
+backslash to escape special regex symbols such as dots in directory names.
 
 Example of setting the list of excluded directories in your user preferences file:
 
     {
       "excluded_dir_patterns": [
-        "tmp", ".git", ".svn"
+        "tmp", "|.git", "|.svn"
       ]
     }
 
@@ -97,7 +96,7 @@ Example of setting the list of excluded directories in your user preferences fil
           {
             "excluded_dir_patterns":
             [
-              "tmp", ".git", ".svn", ".hg"
+              "tmp.*", "|.git", "|.svn", "|.hg"
             ]
           }
       }
