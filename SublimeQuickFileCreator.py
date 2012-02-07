@@ -28,8 +28,24 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
         return True
 
     def construct_excluded_pattern(self):
-        settings = sublime.load_settings("SublimeQuickFileCreator.sublime-settings")
-        self.excluded = re.compile('^' + '|'.join(settings.get('excluded_dir_patterns')) + '$')
+        patterns = [re.escape(pat) for pat in self.get_setting('excluded_dir_patterns')]
+        self.excluded = re.compile('^' + '|'.join(patterns) + '$')
+
+    def get_setting(self, key):
+        settings = None
+        view = self.window.active_view()
+
+        if view:
+            settings = self.window.active_view().settings()
+
+        if settings and settings.has('SublimeQuickFileCreator') and key in settings.get('SublimeQuickFileCreator'):
+            # Get project-specific setting
+            results = settings.get('SublimeQuickFileCreator')[key]
+        else:
+            # Get user-specific or default setting
+            settings = sublime.load_settings('SublimeQuickFileCreator.sublime-settings')
+            results = settings.get(key)
+        return results
 
     def build_relative_paths(self):
         self.relative_paths = [self.ROOT_DIR_PREFIX + os.path.split(self.root)[-1] + self.ROOT_DIR_SUFFIX]
