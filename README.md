@@ -4,7 +4,7 @@ Plugin that lets you quickly create a file or a subdirectory using ST2's fuzzy
 matching feature.
 
 Normally, in order to create a file or directory in ST2, you have to navigate
-to the parent directory in the side panel and right-click on it, or you open a new
+to the parent directory in the side panel and right-click on it, or you can open a new
 tab and save it using the operating system's save dialog (which may start in a
 directory completely unrelated to your project if you don't have any files
 already opened).
