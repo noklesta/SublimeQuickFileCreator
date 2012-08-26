@@ -1,5 +1,11 @@
 {
   "excluded_dir_patterns": [
+<<<<<<< HEAD
     "|.git", "|.svn"
   ]
 }
+=======
+    "tmp", "|.git", "|.svn"
+  ]
+}
+>>>>>>> SublimeQuickFileCreator/master
