@@ -23,8 +23,8 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
             sublime.error_message('Could not find project root')
             return False
 
-        self.root = folders[0]
-        self.rel_path_start = len(self.root) + 1
+        self.root = os.path.split(folders[0])[0]
+
         return True
 
     def construct_excluded_pattern(self):
@@ -48,14 +48,20 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
         return results
 
     def build_relative_paths(self):
-        self.relative_paths = [self.ROOT_DIR_PREFIX + os.path.split(self.root)[-1] + self.ROOT_DIR_SUFFIX]
-        for base, dirs, files in os.walk(self.root):
-            dirs_copy = dirs[:]
-            [dirs.remove(dir) for dir in dirs_copy if self.excluded.search(dir)]
+        folders = self.window.folders()
+        self.relative_paths = []
+        for path in folders:
+            rootfolders = self.ROOT_DIR_PREFIX + os.path.split(path)[-1] + self.ROOT_DIR_SUFFIX
+            self.relative_paths.append(rootfolders)
 
-            for dir in dirs:
-                relative_path = os.path.join(base, dir)[self.rel_path_start:]
-                self.relative_paths.append(relative_path)
+            for base, dirs, files in os.walk(path):
+                dirs_copy = dirs[:]
+                [dirs.remove(dir) for dir in dirs_copy if self.excluded.search(dir)]
+                self.rel_path_start = len(os.path.split(path)[0]) + 1
+
+                for dir in dirs:
+                    relative_path = os.path.join(base, dir)[self.rel_path_start:]
+                    self.relative_paths.append(relative_path)
 
     def move_current_directory_to_top(self):
         view = self.window.active_view()
