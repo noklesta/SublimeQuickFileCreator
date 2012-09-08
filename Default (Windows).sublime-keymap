@@ -1,4 +1,4 @@
 [
-    { "keys": ["ctrl+alt+n"], "command": "quick_create_file"},
+    { "keys": ["ctrl+alt+o"], "command": "quick_create_file"},
     { "keys": ["ctrl+alt+d"], "command": "quick_create_directory"}
 ]
