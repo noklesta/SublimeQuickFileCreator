@@ -123,4 +123,4 @@ class QuickCreateDirectoryCommand(QuickCreateFileCreatorBase):
         self.doCommand()
 
     def create_and_open_file(self, path):
-        os.mkdir(path)
+        self.create_folder(path)
