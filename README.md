@@ -16,6 +16,12 @@ the list to make it even easier to create the new file or subdirectory in the
 same location. Select a directory, input the new name in the input panel at
 the bottom of the window, and you're done!
 
+The Quick panel lists all the directories in the including any project folders
+added using sublime text project menu.
+
+The File/ Folder Input panel accepts recurive folder or file creation. If the parent
+path does not exist then the path will be created.
+
 ## Installation
 
 ### Package Control
@@ -45,10 +51,10 @@ explained below.
 
 ## Key bindings
 
-The plugin does not install any key bindings automatically. You can set up
-your own key bindings like this:
+The plugin now installs key bindings automatically. Alternatively You can set up
+your own key bindings like this by adding to user key bindings:
 
-    { "keys": ["super+ctrl+n"], "command": "quick_create_file" },
+    { "keys": ["super+ctrl+o"], "command": "quick_create_file" },
     { "keys": ["super+ctrl+d"], "command": "quick_create_directory" }
 
 If you are using Vintage mode and want to use sequences of non-modifier keys,
