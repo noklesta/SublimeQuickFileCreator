@@ -51,7 +51,7 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
         folders = self.window.folders()
         self.relative_paths = []
         for path in folders:
-            rootfolders = self.ROOT_DIR_PREFIX + os.path.split(path)[-1] + self.ROOT_DIR_SUFFIX
+            rootfolders = os.path.split(path)[-1]
             self.relative_paths.append(rootfolders)
 
             for base, dirs, files in os.walk(path):
