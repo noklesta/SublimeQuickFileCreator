@@ -16,8 +16,7 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
             self.selected_dir = self.relative_paths[0]
             self.selected_dir = self.full_torelative_paths[self.selected_dir]
             self.window.show_input_panel(self.INPUT_PANEL_CAPTION, '', self.file_name_input, None, None)
-
-        if len(self.relative_paths) > 1:
+        elif len(self.relative_paths) > 1:
             self.move_current_directory_to_top()
             self.window.show_quick_panel(self.relative_paths, self.dir_selected)
         else:
@@ -47,6 +46,7 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
 
     def build_relative_paths(self):
         folders = self.window.folders()
+        view = self.window.active_view()
         self.relative_paths = []
         self.full_torelative_paths = {}
         for path in folders:
@@ -67,11 +67,12 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
         view = self.window.active_view()
         if view.file_name():
             cur_dir = os.path.dirname(view.file_name())[self.rel_path_start:]
-            for path in self.relative_paths:
-                if path == cur_dir:
-                    i = self.relative_paths.index(path)
-                    self.relative_paths.insert(0, self.relative_paths.pop(i))
-                    break
+            if cur_dir in self.full_torelative_paths:
+                i = self.relative_paths.index(cur_dir)
+                self.relative_paths.insert(0, self.relative_paths.pop(i))
+            else:
+                self.relative_paths.insert(0, os.path.dirname(view.file_name()))
+        return
 
     def dir_selected(self, selected_index):
         if selected_index != -1:
