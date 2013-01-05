@@ -16,11 +16,11 @@ the list to make it even easier to create the new file or subdirectory in the
 same location. Select a directory, input the new name in the input panel at
 the bottom of the window, and you're done!
 
-The Quick panel lists all the directories in the including any project folders
-added using sublime text project menu.
+The quick panel lists all the directories inside any open project folders,
+including folders that have been added using the ST2 project menu.
 
-The File/ Folder Input panel accepts recurive folder or file creation. If the parent
-path does not exist then the path will be created.
+The file/folder input panel supports recursive folder or file creation. If the
+parent path does not exist then the path will be created.
 
 ## Installation
 
@@ -51,8 +51,8 @@ explained below.
 
 ## Key bindings
 
-The plugin now installs key bindings automatically. Alternatively You can set up
-your own key bindings like this by adding to user key bindings:
+The plugin now installs key bindings automatically. Alternatively you can set
+up your own key bindings like this by adding to your user key bindings file:
 
     { "keys": ["super+ctrl+o"], "command": "quick_create_file" },
     { "keys": ["super+ctrl+d"], "command": "quick_create_directory" }
@@ -65,7 +65,7 @@ you can restrict the key bindings to command mode like this:
 
 ## Excluded directories
 
-Some directories, such as those named "tmp" or ".git", are excluded by default
+Some directories, such as those named ".svn" or ".git", are excluded by default
 in order to make the directory listing easier to navigate. You can override
 this setting by specifying a list of regular expressions either in
 Packages/User/SublimeQuickFileCreator.sublime-settings or, for a particular
