@@ -65,7 +65,7 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
 
     def move_current_directory_to_top(self):
         view = self.window.active_view()
-        if view.file_name():
+        if view and view.file_name():
             cur_dir = os.path.dirname(view.file_name())[self.rel_path_start:]
             if cur_dir in self.full_torelative_paths:
                 i = self.relative_paths.index(cur_dir)
