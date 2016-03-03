@@ -46,7 +46,6 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
 
     def build_relative_paths(self):
         folders = self.window.folders()
-        view = self.window.active_view()
         self.relative_paths = []
         self.full_torelative_paths = {}
         for path in folders:
