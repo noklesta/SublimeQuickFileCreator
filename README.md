@@ -82,9 +82,13 @@ backslash to escape special regex symbols such as dots in directory names.
 Example of setting the list of excluded directories in your user preferences file:
 
     {
-      "excluded_dir_patterns": [
-        "tmp", "|.git", "|.svn"
-      ]
+      "SublimeQuickFileCreator": 
+      {
+        "excluded_dir_patterns": 
+        [
+          "tmp", "|.git", "|.svn"
+        ]
+      }
     }
 
 ...and in a project file:
