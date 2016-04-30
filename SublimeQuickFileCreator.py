@@ -57,13 +57,14 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
 
 
             for base, dirs, files in os.walk(path):
+                descend = []
                 for dir in dirs:
                     relative_path = os.path.relpath(os.path.join(base, dir), self.rel_path_start)
                     if not self.excluded.search(relative_path):
                         self.full_torelative_paths[relative_path] = os.path.join(base, dir)
                         self.relative_paths.append(relative_path)
-                    else:
-                        dirs.remove(dir)
+                        descend.append(dir)
+                dirs[:] = descend
 
     def move_current_directory_to_top(self):
         view = self.window.active_view()
