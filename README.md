@@ -1,9 +1,9 @@
-# Quick File Creator plugin for Sublime Text 2
+# Quick File Creator plugin for Sublime Text
 
-Plugin that lets you quickly create a file or a subdirectory using ST2's fuzzy
+Plugin that lets you quickly create a file or a subdirectory using ST's fuzzy
 matching feature.
 
-Normally, in order to create a file or directory in ST2, you have to navigate
+Normally, in order to create a file or directory in ST, you have to navigate
 to the parent directory in the side panel and right-click on it, or you can open a new
 tab and save it using the operating system's save dialog (which may start in a
 directory completely unrelated to your project if you don't have any files
@@ -17,7 +17,7 @@ same location. Select a directory, input the new name in the input panel at
 the bottom of the window, and you're done!
 
 The quick panel lists all the directories inside any open project folders,
-including folders that have been added using the ST2 project menu.
+including folders that have been added using the ST project menu.
 
 The file/folder input panel supports recursive folder or file creation. If the
 parent path does not exist then the path will be created.
@@ -29,7 +29,7 @@ parent path does not exist then the path will be created.
 The easiest way to install this is with [Package
 Control](http://wbond.net/sublime\_packages/package\_control).
 
- * If you just went and installed Package Control, you probably need to restart Sublime Text 2 before doing this next bit.
+ * If you just went and installed Package Control, you probably need to restart Sublime Text before doing this next bit.
  * Bring up the Command Palette (Command+Shift+p on OS X, Control+Shift+p on Linux/Windows).
  * Select "Package Control: Install Package" (it'll take a few seconds)
  * Select Quick File Creator when the list appears.
@@ -75,7 +75,7 @@ Packages/SublimeQuickFileCreator/SublimeQuickFileCreator.sublime-settings and
 modify it.
 
 Note that each pattern is anchored to the beginning and end of the directory
-name, so you should not use ^ or $ in your patterns. Also, since ST2 does not
+name, so you should not use ^ or $ in your patterns. Also, since ST does not
 allow backslashes in settings files, use a vertical bar (|) instead of a
 backslash to escape special regex symbols such as dots in directory names.
 
@@ -114,8 +114,8 @@ Example of setting the list of excluded directories in your user preferences fil
 
 ## Future work
 
-It seems to me that ST2 does not currently support programmatically selecting
-a directory in the side bar (please correct me if I'm wrong!). If ST2 includes
+It seems to me that ST does not currently support programmatically selecting
+a directory in the side bar (please correct me if I'm wrong!). If ST includes
 this ability in the future, I will make any newly created subdirectories
 become immediately selected.
 
