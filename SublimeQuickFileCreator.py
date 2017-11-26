@@ -25,8 +25,11 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
             self.window.show_input_panel(self.INPUT_PANEL_CAPTION, '', self.file_name_input, None, None)
 
     def construct_excluded_pattern(self):
-        patterns = [pat.replace('|', '\\') for pat in self.get_setting('excluded_dir_patterns')]
-        self.excluded = re.compile('|'.join(patterns))
+        excluded_dir_patterns = self.get_setting('excluded_dir_patterns')
+        self.excluded = re.compile("^$")
+        if excluded_dir_patterns:
+            patterns = [pat.replace('|', '\\') for pat in self.get_setting('excluded_dir_patterns')]
+            self.excluded = re.compile('|'.join(patterns))
 
     def get_setting(self, key):
         settings = None
@@ -80,7 +83,11 @@ class QuickCreateFileCreatorBase(sublime_plugin.WindowCommand):
     def dir_selected(self, selected_index):
         if selected_index != -1:
             self.selected_dir = self.relative_paths[selected_index]
-            self.selected_dir = self.full_torelative_paths[self.selected_dir]
+            try:
+                self.selected_dir = self.full_torelative_paths[self.selected_dir]
+            except KeyError:
+                # selected dir is not in the map, is that even a problem ?
+                pass
             self.window.show_input_panel(self.INPUT_PANEL_CAPTION, '', self.file_name_input, None, None)
 
     def file_name_input(self, file_name):
